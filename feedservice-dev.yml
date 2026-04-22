@@ -1,0 +1,89 @@
+spring:
+  application:
+    name: feedservice
+
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: true
+
+  redis:
+    host: octopusdev.diipl.in
+    port: 7379
+    pool:
+      min-idle: 5
+
+  datasource:
+    write:
+      url: jdbc:mysql://10.1.6.16/octopusallinone-dev
+      username: gaming
+      password: '{cipher}2c11743826544fa8352efe98c488497fc722f82a05e942d68c6f5470ea608b48'
+      driverClassName: com.mysql.cj.jdbc.Driver
+      maxPoolsize: 2
+      leakDetectionDuration: 60000
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 10
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        leak-detection-threshold: 20000
+        validation-timeout: 5000
+        keepalive-time: 30000
+        pool-name: DrawWriteHikariConnPool
+
+    read:
+      url: jdbc:mysql://10.1.6.16/octopusallinone-dev
+      username: gaming
+      password: '{cipher}2c11743826544fa8352efe98c488497fc722f82a05e942d68c6f5470ea608b48'
+      driverClassName: com.mysql.cj.jdbc.Driver
+      maxPoolsize: 2
+      leakDetectionDuration: 60000
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 10
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        leak-detection-threshold: 20000
+        validation-timeout: 5000
+        keepalive-time: 30000
+        pool-name: DrawReadHikariConnPool
+
+    hikari:
+      connection-test-query: SELECT 1
+
+    tomcat:
+      max-active: 2000
+      minEvictableIdleTimeMillis: 5000
+      validationQuery: SELECT 1
+      minIdle: 1
+      maxIdle: 5
+      initialSize: 1
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+server:
+  port: 8001
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka/
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+logging:
+  level:
+    com.zaxxer.hikari: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG
