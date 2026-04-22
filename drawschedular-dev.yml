@@ -1,0 +1,96 @@
+spring:
+  application:
+    name: drawschedular
+
+  main:
+    allow-bean-definition-overriding: true
+
+  kafka:
+    bootstrap-servers: localhost:7092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  redis:
+    host: localhost
+    port: 7379
+    pool:
+      min-idle: 5
+
+  datasource:
+    write:
+      url: jdbc:mysql://10.1.6.16/octopusallinone-dev
+      username: gaming
+      password: '!d11pl'   # ⚠️ encrypt this
+      driverClassName: com.mysql.cj.jdbc.Driver
+      maxPoolsize: 3
+      leakDetectionDuration: 60000
+      hikari:
+        maximum-pool-size: 50
+        minimum-idle: 20
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        leak-detection-threshold: 20000
+        validation-timeout: 5000
+        keepalive-time: 30000
+        pool-name: DrawSchedulerWriteHikariConnPool
+
+    hikari:
+      connection-test-query: SELECT 1
+
+    read:
+      url: jdbc:mysql://10.1.6.16/octopusallinone-dev
+      username: gaming
+      password: '!d11pl'   # ⚠️ encrypt this
+      driverClassName: com.mysql.cj.jdbc.Driver
+      maxPoolsize: 3
+      leakDetectionDuration: 60000
+      hikari:
+        maximum-pool-size: 50
+        minimum-idle: 20
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        leak-detection-threshold: 20000
+        validation-timeout: 5000
+        keepalive-time: 30000
+        pool-name: DrawSchedulerWriteHikariConnPool
+
+    tomcat:
+      max-active: 2000
+      minEvictableIdleTimeMillis: 5000
+      validationQuery: SELECT 1
+      minIdle: 1
+      maxIdle: 5
+      initialSize: 1
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+server:
+  port: 7081
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:7083/eureka/
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+# ================= CUSTOM =================
+ballInterval: 10000
+
+thirdPartyTokenUrl: https://qa-api.ggglottery.com/api
+clientid: 39610639-0b60-4511-a8ec-4b3efc4a45b7
+clientsecret: U2FsdGVkX18uj6N5RQv1yA1CyRr9qahwQahJrmjf9qttwcrz6J1WWC6zqFDlxpXj9eZT5iyyofxtCiGOLMd7h6VNbt0o/iMSPwwh7ThToa4=
