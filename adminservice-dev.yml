@@ -1,0 +1,130 @@
+spring:
+  application:
+    name: adminservice
+
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: true
+
+  redis:
+    host: localhost
+    port: 7379
+    pool:
+      min-idle: 5
+
+  datasource:
+    write:
+      url: jdbc:mysql://10.1.6.16:3306/octopusallinone-dev
+      username: gaming
+      password: {cipher}b0b07b785eed98cb3fab5de48dde71eeee559935a27d06293691de8a0bfa600b'
+      driverClassName: com.mysql.cj.jdbc.Driver
+      maxPoolsize: 3
+      leakDetectionDuration: 60000
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 10
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        leak-detection-threshold: 20000
+        validation-timeout: 5000
+        keepalive-time: 30000
+        pool-name: AdminWriteHikariConnPool
+
+    read:
+      url: jdbc:mysql://10.1.6.16:3306/octopusallinone-dev
+      username: gaming
+      password: '{cipher}b0b07b785eed98cb3fab5de48dde71eeee559935a27d06293691de8a0bfa600b'
+      driverClassName: com.mysql.cj.jdbc.Driver
+      maxPoolsize: 3
+      leakDetectionDuration: 60000
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 10
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        leak-detection-threshold: 20000
+        validation-timeout: 5000
+        keepalive-time: 30000
+        pool-name: AdminReadHikariConnPool
+
+    hikari:
+      connection-test-query: SELECT 1
+
+    tomcat:
+      max-active: 2000
+      minEvictableIdleTimeMillis: 5000
+      validationQuery: SELECT 1
+      minIdle: 1
+      maxIdle: 5
+      initialSize: 1
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    proc:
+      param_null_passing: true
+
+server:
+  port: 7005
+  max-http-request-header-size: 100KB
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:7083/eureka/
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+opas:
+  host: https://octopusapi.diipl.in:7761/op
+
+google:
+  recaptcha:
+    site:
+      key: {cipher}09f0062cea9a406a342fb5e0fd4287f753441b07d845cd23ab68bacf46077f9dbdb4cb0507753a30cfb9646251415fb8e3ceaceb64288c0461e2b755c175aa4f
+    secret:
+      key: {cipher}e96acf8ccd89cfd6f1ca6b20f0c28de5b9718661fbdf6e0c4fdc3ecca9e42429d71ecd7be5c876742bbbcfc95a4800e5a92bd639c145f5037546867fb3e78ce1
+    verify:
+      url: https://www.google.com/recaptcha/api/siteverify
+
+serverTime:
+  offset: '+05:30'
+  zone: IST
+
+IMAGE:
+  BUCKET:
+    LOCATION: /var/www/octopusstorage
+
+amazon-aws-url: https://octopusapi.diipl.in:7761
+file-location: /var/www/octopusstorage
+
+S3:
+  BUCKET:
+    LOCATION: octopusstorage
+
+s3-bucket:
+  name: octopusstorage
+  expiration_time_in_minutes: 30
+  region: ap-south-1
+
+aws-credentials:
+  access_key_id: {cipher}7b869a9ff048d5a5487ced15148a95262226bf1daaf44dc38497d6d974421c1cd239c9bf86a3750a6f5b91ba8b56c802
+  secret_access_key: {cipher}6cf1babeea718260b52b565bc906c83a0eb99d1dd9ac01cb4e658fa298a840816e0a4cd5746a00045be79b1ec86be5988d4d0ec58294f5d03e0e7ebe80626a3b
+
+logging:
+  level:
+    com.zaxxer.hikari: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG
+
+isAmazonS3: false
