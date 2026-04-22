@@ -21,7 +21,7 @@ spring:
     write:
       url: jdbc:mysql://10.1.6.16/octopusallinone-dev
       username: gaming
-      password: '!d11pl'   # ⚠️ encrypt this
+      password: '{cipher}f78b67127b8a025cc94c9e8a8c1ecb320cfef9247ede23bf90dc1688d931988a'
       driverClassName: com.mysql.cj.jdbc.Driver
       maxPoolsize: 3
       leakDetectionDuration: 60000
@@ -42,7 +42,7 @@ spring:
     read:
       url: jdbc:mysql://10.1.6.16/octopusallinone-dev
       username: gaming
-      password: '!d11pl'   # ⚠️ encrypt this
+      password: '{cipher}f78b67127b8a025cc94c9e8a8c1ecb320cfef9247ede23bf90dc1688d931988a'
       driverClassName: com.mysql.cj.jdbc.Driver
       maxPoolsize: 3
       leakDetectionDuration: 60000
@@ -88,9 +88,8 @@ eureka:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
 
-# ================= CUSTOM =================
 ballInterval: 10000
 
 thirdPartyTokenUrl: https://qa-api.ggglottery.com/api
 clientid: 39610639-0b60-4511-a8ec-4b3efc4a45b7
-clientsecret: U2FsdGVkX18uj6N5RQv1yA1CyRr9qahwQahJrmjf9qttwcrz6J1WWC6zqFDlxpXj9eZT5iyyofxtCiGOLMd7h6VNbt0o/iMSPwwh7ThToa4=
+clientsecret: {cipher}f35ce0c6da79425c3ee47f4be5d59c605c7255a9323242555689432a1d8e74f9b618d1ad5c1d8fd36824cb3ab5fed65c973a751dff0900f9859be486be6b122db75dd612d079e6cfa008cdadb99daeebeaa09fe0d041c01d08c448f7888ead3459accb1c764df93b602f5c805d1231069136f43fe7c2607358dc57a4c94ed94e
