@@ -1,0 +1,188 @@
+spring:
+  application:
+    name: transactionservice
+
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: true
+
+  servlet:
+    multipart:
+      enabled: true
+
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+  redis:
+    host: localhost
+    port: 7379
+    timeout: 60000ms
+    client-type: jedis
+    jedis:
+      pool:
+        max-active: 100
+        max-idle: 20
+        min-idle: 5
+        test-on-borrow: true
+        test-while-idle: true
+
+  datasource:
+    write:
+      url: jdbc:mysql://10.1.6.16/octopusallinone-dev
+      username: gaming
+      password: '{cipher}f78b67127b8a025cc94c9e8a8c1ecb320cfef9247ede23bf90dc1688d931988a'
+      driverClassName: com.mysql.cj.jdbc.Driver
+      maxPoolsize: 2
+      leakDetectionDuration: 60000
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 10
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        leak-detection-threshold: 20000
+        validation-timeout: 5000
+        keepalive-time: 30000
+        pool-name: BetWriteHikariConnPool
+
+    read:
+      url: jdbc:mysql://10.1.6.16/octopusallinone-dev
+      username: gaming
+      password: '{cipher}f78b67127b8a025cc94c9e8a8c1ecb320cfef9247ede23bf90dc1688d931988a'
+      driverClassName: com.mysql.cj.jdbc.Driver
+      maxPoolsize: 2
+      leakDetectionDuration: 60000
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 10
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        leak-detection-threshold: 20000
+        validation-timeout: 5000
+        keepalive-time: 30000
+        pool-name: BetReadHikariConnPool
+
+    hikari:
+      connection-test-query: SELECT 1
+
+    tomcat:
+      max-active: 2000
+      minEvictableIdleTimeMillis: 5000
+      validationQuery: SELECT 1
+      minIdle: 1
+      maxIdle: 5
+      initialSize: 1
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        id:
+          new_generator_mappings: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    proc:
+      param_null_passing: true
+
+  kafka:
+    bootstrap-servers: localhost:8092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: bingo-bet-group
+      auto-offset-reset: earliest
+
+server:
+  port: 7002
+  max-http-request-header-size: 100KB
+  tomcat:
+    threads:
+      max: 500
+      min-spare: 50
+    accept-count: 200
+    connection-timeout: 20000
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:7083/eureka/
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env
+  metrics:
+    enable:
+      all: true
+
+opas:
+  host: https://octopusapi.diipl.in:7761/op
+  service:
+    url: https://octopusapi.diipl.in:8761/op
+
+google:
+  recaptcha:
+    site:
+      key: 6LevzusUAAAAAJ0NyjZU6ijBi-V_MOMoZ6m0YWhk
+    secret:
+      key: 6LevzusUAAAAANtORZgMRom37-MSm6nzoaeVeLoP
+    verify:
+      url: https://www.google.com/recaptcha/api/siteverify
+
+aws:
+  accessKey: {cipher}2f20b3fec9f227f878d9c6be12b4ccb561774b19ab7a7a7d5226ff50d46255d6d976bd170e9112df61ee6d40b931cd7b
+  secretKey: {cipher}a91da67c6e2c09257611d837395a98f5156d66c921d6b96e7659c5c8ccf6066d19e4288c7e137260dbe7ee0105a09158
+
+client:
+  id: 39610639-0b60-4511-a8ec-4b3efc4a45b7
+  secret: U2FsdGVkX18uj6N5RQv1yA1CyRr9qahwQahJrmjf9qttwcrz6J1WWC6zqFDlxpXj9eZT5iyyofxtCiGOLMd7h6VNbt0o/iMSPwwh7ThToa4=
+
+tp:
+  clientId: 39610639-0b60-4511-a8ec-4b3efc4a45b7
+  clientSecret: {cipher}2a4f63f943e9a40e6d0789e103c616f7a426f742d43c7b6718346a43e168707c85375fa72d259421c2427df68a926456de0eafbeccc918060fe49150647a27f942e3215f479bebca1e968eff246751749b80802be2ff876e49defeb683ad38eff4c7950d9c5c9b32314e2ceaae7161821b229919a6ea6c6fae13257adb19e277
+
+thirdPartyTokenUrl: https://qa-api.ggglottery.com/api
+
+loadtestingSecretkey: acb1324804f07fa140636624172f7694e76aa3b16947c0d191043b08285513ef
+
+mts:
+  enabled: false
+  confidence: 10000
+  configPath: /home/octopusdev/Builds/betService/config/mts-sdk1.properties
+
+printCert: /var/www/ybadmin/assets/digital-certificate.txt
+printPrivKey: /var/www/ybadmin/assets/private-key.pem
+
+payCancelSchedular: false
+maxPayAmount: 10000
+isAmazonS3: true
+iscartBetAmt: true
+isMultipleSessionLogin: true
+enableFreeBet: true
+tktCount: 5
+
+IMAGE:
+  BUCKET:
+    LOCATION: /var/www/octopusstorage/claim-form
+
+S3:
+  BUCKET:
+    LOCATION: octopusstorage
+
+logging:
+  level:
+    com.zaxxer.hikari: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG
